@@ -54,23 +54,22 @@ void run_mma_16_16_16() {
     cudaMemcpy(d_a, h_a, sizeof(half) * 16 * 16, cudaMemcpyKind::cudaMemcpyHostToDevice);
     cudaMemcpy(d_b, h_b, sizeof(half) * 16 * 16, cudaMemcpyKind::cudaMemcpyHostToDevice);
 
-    mma_16_16_16<<<1, 32>>>(h_a, h_b, h_c);
+    mma_16_16_16<<<1, 32>>>(d_a, d_b, d_c);
 
     cudaMemcpy(h_c, d_c, sizeof(float) * 16 * 16, cudaMemcpyKind::cudaMemcpyDeviceToHost);
 
     cudaDeviceSynchronize();
 
-    cudaFree(h_a);
-    cudaFree(h_b);
-    cudaFree(h_c);
+    cudaFree(d_a);
+    cudaFree(d_b);
+    cudaFree(d_c);
 
     std::cout << "print result as below:" << std::endl;
     for (unsigned i = 0; i < 16 * 16; i++) {
         std::cout << h_c[i] << "\t";
-        if (i % 16 == 0)
+        if ((i + 1) % 16 == 0)
             std::cout << std::endl;
     }
-
 }
 
 int main() {
