@@ -11,3 +11,4 @@ cuda_compile_dep = dependency('cuda', version: '>=12.0', modules: ['cudart'])
 
 executable('case1_hello_world', 'src/case1_helloworld/case1_helloworld.cu')
 executable('topic1_mma_16_16_16', 'src/topic1_tensor_core/case1_mma_16_16_16.cu', cuda_args: cuda_compile_args, dependencies: cuda_compile_dep)
+executable('topic2_case1_constant_mem_test', 'src/topic2_memory/case2_1_constant_memory.cu', cuda_args: cuda_compile_args, dependencies: cuda_compile_dep)
