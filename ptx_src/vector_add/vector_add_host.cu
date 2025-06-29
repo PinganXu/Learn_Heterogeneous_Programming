@@ -9,16 +9,16 @@ __global__ void vector_add(float* src_A, float* src_B, float* src_C, unsigned N)
     // use ptx to do vector add
     asm volatile (
         "{\n\t"
-        "    .reg .f32 a, b;                    \n\t"
-        "    .reg .u64 addr_a, addr_b, addr_c;  \n\t"
-        "    mul.wide.u32 addr_a, %3, 4;        \n\t"
-        "    add.u64 addr_b, addr_a, %1;        \n\t"
-        "    add.u64 addr_c, addr_a, %2;        \n\t"
-        "    add.u64 addr_a, addr_a, %0;        \n\t"
-        "    ld.global.f32 a, [addr_a];         \n\t"
-        "    ld.global.f32 b, [addr_b];         \n\t"
-        "    add.f32 a, a, b;                   \n\t"
-        "    st.global.f32 [addr_c], a;         \n\t"
+        "    .reg .f32 a, b;                     \n\t"
+        "    .reg .u64 addr_a, addr_b, addr_c;   \n\t"
+        "    mul.wide.u32 addr_a, %3, 4;         \n\t"
+        "    add.u64 addr_b, addr_a, %1;         \n\t"
+        "    add.u64 addr_c, addr_a, %2;         \n\t"
+        "    add.u64 addr_a, addr_a, %0;         \n\t"
+        "    ld.global.f32 a, [addr_a];          \n\t"
+        "    ld.global.f32 b, [addr_b];          \n\t"
+        "    add.f32 a, a, b;                    \n\t"
+        "    st.global.f32 [addr_c], a;          \n\t"
         "}\n\t"
         :                                               // no output
         : "l"(src_A), "l"(src_B), "l"(src_C), "r"(idx)  // %0, %1, %2, %3
