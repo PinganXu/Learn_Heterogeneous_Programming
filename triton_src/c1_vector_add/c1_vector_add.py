@@ -35,8 +35,10 @@ def add(x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
     grid = lambda meta: (triton.cdiv(n_elements, meta['BLOCK_SIZE']), )
     
     # lambda function grid will get parameter 'BLOCK_SIZE'
-    add_kernel[grid](x, y, output, n_elements, BLOCK_SIZE=1024)
+    kernel = add_kernel[grid](x, y, output, n_elements, BLOCK_SIZE=1024)
 
+    with open('add_kernel.ptx', 'w') as f:
+        print(kernel.asm['ptx'], file=f)
     return output
 
 
