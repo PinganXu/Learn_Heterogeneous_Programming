@@ -16,6 +16,7 @@ executable('topic2_case1_constant_mem_test', 'cuda_src/topic2_memory/case2_1_con
 executable('topic3_cvt_fp32_to_fp4', 'cuda_src/topic3_float/cvt_fp32_to_fp4.cu', cuda_args: cuda_compile_args, dependencies: cuda_compile_dep)
 executable('topic3_cvt_fp16_to_fp32', 'cuda_src/topic3_float/cvt_fp16_to_fp32.cu', cuda_args: cuda_compile_args, dependencies: cuda_compile_dep)
 executable('topic3_cvt_bf16_to_fp32', 'cuda_src/topic3_float/cvt_bf16_to_fp32.cu', cuda_args: cuda_compile_args, dependencies: cuda_compile_dep)
+executable('topic3_cvt_fp4_to_fp16', 'cuda_src/topic3_float/cvt_fp4_to_fp16.cu', cuda_args: cuda_compile_args, dependencies: cuda_compile_dep)
 
 # ptx_src zone
 executable('ptx_vector_add', 'ptx_src/vector_add/vector_add_host.cu', cuda_args: cuda_compile_args, dependencies: cuda_compile_dep)
